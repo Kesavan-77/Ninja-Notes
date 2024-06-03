@@ -7,6 +7,9 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <x-alert-success>
+                {{ session('success') }}
+            </x-alert-success>
             @if(request()->routeIs('notes.index'))
                 <a href="{{ route('notes.create') }}" class="btn-link btn-lg mb-2">+ New Note</a>
             @endif
@@ -19,7 +22,7 @@
                         {{ Str::limit($note->description,200) }}
                     </p>
                     <span
-                        class="block mt-4 text-sm opacity-70">{{ \Carbon\Carbon::now()->diffForHumans($note->updated_at) }}</span>
+                        class="block mt-4 text-sm opacity-70">{{ $note->updated_at->diffForHumans() }}</span>
                 </div>
             @empty
                 <p class="mt-2">
