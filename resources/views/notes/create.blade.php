@@ -25,7 +25,7 @@
                         field="description"
                         placeholder="Start typing here..."
                         class="w-full mt-6"
-                        :value="@old('text')"></x-textarea>
+                        :value="@old('description')"></x-textarea>
                     
                     <x-button class="mt-6">Save Note</x-button>
                 </form>
