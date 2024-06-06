@@ -16,8 +16,8 @@ class NoteController extends Controller
      */
     public function index()
     {
-        $notes = Note::where('user_id',Auth::user()->id)->latest('updated_at')->paginate(4);
-        return view('notes.index')->with('notes',$notes);
+        $notes = Note::with('user')->latest('updated_at')->paginate(4);
+        return view('notes.index', ['notes' => $notes]);
     }
 
     /**
@@ -40,14 +40,14 @@ class NoteController extends Controller
     {
         $request->validate([
             'title' => 'required|max:250',
-            'description' =>'required'
+            'description' => 'required'
         ]);
 
         Note::create([
             'uuid' => Str::uuid(),
             'user_id' => Auth::id(),
             'title' => $request->title,
-            'description' => $request-> description,
+            'description' => $request->description,
         ]);
 
         return redirect('/notes');
@@ -61,11 +61,11 @@ class NoteController extends Controller
      */
     public function show(Note $note)
     {
-        if($note->user_id!=Auth::id()){
-            return abort(403);
-        }
+        // if($note->user_id!=Auth::id()){
+        //     return abort(403);
+        // }
         // $note = Note::where('uuid',$id)->where('user_id',Auth::id())->firstOrFail();
-        return view('notes.show')->with('note',$note);
+        return view('notes.show', ['note' => $note, 'auth_id' => Auth::id()]);
     }
 
     /**
@@ -76,7 +76,7 @@ class NoteController extends Controller
      */
     public function edit(Note $note)
     {
-        return view('notes.edit')->with('note',$note);
+        return view('notes.edit')->with('note', $note);
     }
 
     /**
@@ -86,19 +86,19 @@ class NoteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Note $note)
+    public function update(Request $request, Note $note)
     {
         $request->validate([
             'title' => 'required|max:250',
-            'description' =>'required'
+            'description' => 'required'
         ]);
-        
+
         $note->update([
             'title' => $request->title,
             'description' => $request->description,
         ]);
 
-        return to_route('notes.show',$note)->with('success',"Note updated Successfully");
+        return to_route('notes.show', $note)->with('success', "Note updated Successfully");
     }
 
     /**
@@ -111,6 +111,6 @@ class NoteController extends Controller
     {
         $note->delete();
 
-        return to_route('notes.index')->with('success',"Note deleted Successfully");
+        return to_route('notes.index')->with('success', "Note deleted Successfully");
     }
 }

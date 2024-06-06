@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TrashController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,5 +31,9 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('/notes',NoteController::class)->middleware((['auth','verified']));
+
+Route::get('trash',[TrashController::class,'index'])->name('trash.index');
+Route::post('trash/{id}/restore',[TrashController::class,'restore'])->name('trash.restore');
+Route::delete('trash/{id}',[TrashController::class,'destroy'])->name('trash.destroy');
 
 require __DIR__.'/auth.php';

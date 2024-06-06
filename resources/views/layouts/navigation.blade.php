@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('notes.index') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                        <h1 class="text-2xl font-bold">Ninja Notes</h1>
                     </a>
                 </div>
 
@@ -16,6 +16,13 @@
                         {{ __('Notes') }}
                     </x-nav-link>
                 </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('trash.index')" :active="request()->routeIs('trash.index')">
+                       Trash
+                    </x-nav-link>
+                </div>
+
             </div>
 
             <!-- Settings Dropdown -->

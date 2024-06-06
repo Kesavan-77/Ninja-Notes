@@ -15,24 +15,21 @@
 </head>
 
 <body class="antialiased">
-    <div
-        class="relative flex items-top justify-center min-h-screen sm:items-center py-4 sm:pt-0">
+    <div class="flex flex-col items-center justify-center min-h-screen py-4 sm:pt-0">
+        <h1 class="text-5xl">Ninja Notes</h1>
         @if (Route::has('login'))
-            <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+            <div class="hidden px-6 mt-4 py-4 sm:block">
                 @auth
-                    <a href="{{ route('notes.index') }}"
-                        class="text-sm t underline">Notes</a>
+                    <a href="{{ route('notes.index') }}" class="btn-link btn-lg ml-auto bg-green-500 hover:bg-green-700">Notes</a>
                 @else
-                    <a href="{{ route('login') }}" class="text-sm underline">Log in</a>
+                    <a href="{{ route('login') }}" class="btn-link btn-lg ml-auto bg-blue-500 hover:bg-blue-700">Log in</a>
 
                     @if (Route::has('register'))
-                        <a href="{{ route('register') }}"
-                            class="ml-4 text-sm  underline">Register</a>
+                        <a href="{{ route('register') }}" class="btn-link btn-lg ml-auto bg-red-500 hover:bg-red-700">Register</a>
                     @endif
                 @endauth
             </div>
         @endif
-        <h1 class="text-5xl">Ninja Notes</h1>
     </div>
 </body>
 
