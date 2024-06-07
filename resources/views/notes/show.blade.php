@@ -38,6 +38,11 @@
                 <p class="mt whitespace-pre-wrap text-md">
                     {{ $note->description, 200 }}
                 </p>
+                <div class="flex items-center gap-5">
+                    <span class="flex items-center gap-2"><i class="fa fa-thumbs-o-up" aria-hidden="true" height="30px" width="30px"></i><p>like</p></span>
+                    <span class="flex items-center gap-2">
+                        <i class="fa fa-comments-o" aria-hidden="true"></i><p>markdown</p></span>
+                </div>
             </div>
         </div>
     </div>
