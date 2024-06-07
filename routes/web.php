@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TrashController;
@@ -35,5 +36,8 @@ Route::resource('/notes',NoteController::class)->middleware((['auth','verified']
 Route::get('trash',[TrashController::class,'index'])->name('trash.index');
 Route::post('trash/{id}/restore',[TrashController::class,'restore'])->name('trash.restore');
 Route::delete('trash/{id}',[TrashController::class,'destroy'])->name('trash.destroy');
+
+Route::post('/likes',[LikeController::class,'manage'])->name('likes.manage');
+Route::get('/likes',[LikeController::class,'count'])->name('likes.count');
 
 require __DIR__.'/auth.php';
