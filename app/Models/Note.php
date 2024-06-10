@@ -25,4 +25,8 @@ class Note extends Model
     public function likes(){
       $this->hasMany(Like::class);
     }
+
+    public function markdowns(){
+      $this->hasMany(Markdown::class);
+    }
 }

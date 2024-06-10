@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'ph_number'
     ];
 
     /**
@@ -32,7 +33,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-
+    
     /**
      * The attributes that should be cast.
      *
@@ -48,5 +49,9 @@ class User extends Authenticatable
 
     public function like(){
         return $this->hasOne(Like::class);
+    }
+
+    public function markdowns(){
+        return $this->hasMany(Markdown::class);
     }
 }

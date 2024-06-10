@@ -41,41 +41,57 @@
 <script>
     $(document).ready(function() {
 
+        // Toggle the markdown container
+        $('#markdown-btn').on('click', function() {
+            $('#markdown-container').toggle();
+        });
+
+        // $('#markdown-form').on('submit',function(){
+        //     let markdown = $('#markdown').val();
+
+        // });
+
+        // CSRF token setup for AJAX requests
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
 
-        var id = $('#note-id').text();
+        // Get the note ID
+        var id = $('#note-id').text().trim();
+
+        // Fetch the like count
         $.ajax({
-                type: 'GET',
-                url: '{{ route('likes.count') }}',
-                data:{
-                    noteId:id
-                },
-                success: function(data) {
-                    likeCount = data;
-                    $('#like-count').text(likeCount);
-                },
-                error: function(xhr) {
-                    alert('An error occurred. Please try again.');
-                }
-            });
+            type: 'GET',
+            url: '{{ route('likes.count') }}',
+            data: {
+                noteId: id
+            },
+            success: function(data) {
+                let likeCount = data;
+                $('#like-count').text(likeCount);
+            },
+            error: function(xhr) {
+                console.error('Error fetching like count:', xhr);
+                alert('An error occurred while fetching the like count. Please try again.');
+            }
+        });
 
         $('#like-btn').on('click', function() {
             $.ajax({
                 type: 'POST',
                 url: '{{ route('likes.manage') }}',
-                data:{
-                    noteId:id
+                data: {
+                    noteId: id
                 },
                 success: function(data) {
-                    likeCount = data;
+                    let likeCount = data;
                     $('#like-count').text(likeCount);
                 },
                 error: function(xhr) {
-                    alert('An error occurred. Please try again.');
+                    console.error('Error managing like:', xhr);
+                    alert('An error occurred while managing the like. Please try again.');
                 }
             });
         });

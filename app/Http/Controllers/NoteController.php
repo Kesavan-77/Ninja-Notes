@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Markdown;
 use App\Models\Note;
+use App\Models\User;
+use App\Notifications\UserFollowNotification;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Facades\Vonage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
@@ -65,9 +69,10 @@ class NoteController extends Controller
         //     return abort(403);
         // }
         // $note = Note::where('uuid',$id)->where('user_id',Auth::id())->firstOrFail();
-        return view('notes.show', ['note' => $note, 'auth_id' => Auth::id()]);
+        $markdown = Markdown::with('user')->where('note_id',$note->id)->get();
+        return view('notes.show', ['note' => $note, 'auth_id' => Auth::id(), 'markdown'=>$markdown]);
     }
-
+    
     /**
      * Show the form for editing the specified resource.
      *

@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\MarkdownController;
 use App\Http\Controllers\NoteController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TrashController;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +33,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/notification',[NotificationController::class,'notify'])->name('notify');
+
 Route::resource('/notes',NoteController::class)->middleware((['auth','verified']));
 
 Route::get('trash',[TrashController::class,'index'])->name('trash.index');
@@ -39,5 +43,7 @@ Route::delete('trash/{id}',[TrashController::class,'destroy'])->name('trash.dest
 
 Route::post('/likes',[LikeController::class,'manage'])->name('likes.manage');
 Route::get('/likes',[LikeController::class,'count'])->name('likes.count');
+
+Route::post('/markdown',[MarkdownController::class,'store'])->name('markdown.store');
 
 require __DIR__.'/auth.php';

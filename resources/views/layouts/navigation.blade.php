@@ -19,7 +19,13 @@
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('trash.index')" :active="request()->routeIs('trash.index')">
-                       Trash
+                        {{ __('Trash') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('notify')" :active="request()->routeIs('notify')">
+                        {{ __('Notification') }}
                     </x-nav-link>
                 </div>
 
@@ -76,6 +82,12 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('notes.index')" :active="request()->routeIs('notes.index')">
                 {{ __('Notes') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('trash.index')" :active="request()->routeIs('trash.index')">
+                {{ __('Trash') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('notify')" :active="request()->routeIs('notify')">
+                {{ __('Notifications') }}
             </x-responsive-nav-link>
         </div>
 

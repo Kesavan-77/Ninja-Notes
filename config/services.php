@@ -31,4 +31,8 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'vonage'=>[
+        'sms_from' => '1223444455',
+    ]
+
 ];
