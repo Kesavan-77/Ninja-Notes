@@ -9,13 +9,20 @@ class Markdown extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['note_id','user_id','markdown'];
+    protected $guarded = [];
 
-    public function note(){
-        return $this->belongsTo(Note::class,'note_id');
+    public function getRouteKeyName()
+    {
+        return 'uuid';
     }
 
-    public function user(){
-        return $this->belongsTo(User::class,'user_id');
+    public function note()
+    {
+        return $this->belongsTo(Note::class, 'note_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

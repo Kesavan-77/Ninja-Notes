@@ -26,13 +26,13 @@
                         <form action="{{ route('trash.restore', $trash->id) }}" method="POST">
                             @csrf
                             <button type="submit"
-                                class="btn-link btn-lg bg-blue-500 hover:bg-blue-700">Restore</button>
+                                class="btn-link btn-lg bg-blue-800 hover:bg-blue-900">Restore</button>
                         </form>
 
                         <form action="{{ route('trash.destroy', $trash->id) }}" method="POST">
                             @method('DELETE')
                             @csrf
-                            <button type="submit" class="btn-link btn-lg ml-4 bg-red-500 hover:bg-red-700"
+                            <button type="submit" class="btn-link btn-lg ml-4 bg-red-700 hover:bg-red-800"
                                 onclick="return confirm('Are you sure want to delete this note?')">Delete
                                 Permanently</button>
                         </form>

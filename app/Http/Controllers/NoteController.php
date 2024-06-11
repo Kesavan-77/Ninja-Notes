@@ -20,7 +20,7 @@ class NoteController extends Controller
      */
     public function index()
     {
-        $notes = Note::with('user')->latest('updated_at')->paginate(4);
+        $notes = Note::with('user')->latest('updated_at')->paginate(6);
         return view('notes.index', ['notes' => $notes]);
     }
 
@@ -54,7 +54,7 @@ class NoteController extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect('/notes');
+        return redirect('/notes')->with('success', "Note created Successfully");;
     }
 
     /**

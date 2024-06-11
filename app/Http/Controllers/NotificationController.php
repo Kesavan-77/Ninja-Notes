@@ -10,6 +10,7 @@ class NotificationController extends Controller
 {
     public function notify()
     {
-        return view('notes.notification');
+        $notifications = auth()->user()->notifications;
+        return view('notes.notification')->with('notifications',$notifications);
     }
 }

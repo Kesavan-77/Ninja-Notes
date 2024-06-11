@@ -44,6 +44,6 @@ Route::delete('trash/{id}',[TrashController::class,'destroy'])->name('trash.dest
 Route::post('/likes',[LikeController::class,'manage'])->name('likes.manage');
 Route::get('/likes',[LikeController::class,'count'])->name('likes.count');
 
-Route::post('/markdown',[MarkdownController::class,'store'])->name('markdown.store');
+Route::resource('notes/markdown',MarkdownController::class);
 
 require __DIR__.'/auth.php';

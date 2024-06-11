@@ -11,26 +11,28 @@
                 {{ session('success') }}
             </x-alert-success>
             @if (request()->routeIs('notes.index'))
-                <a href="{{ route('notes.create') }}" class="btn-link btn-lg mb-2">+ New Note</a>
+                <a href="{{ route('notes.create') }}" class="btn-link btn-lg mb-2 bg-blue-800">+ New Note</a>
             @endif
-            @forelse($notes as $note)
-                <div class="my-6 p-6 bg-white border-b border-gray-200 shadow-sm sm:rounded-lg">
-                    <div class="flex items-center justify-between mb-4">
-                        <h2 class="font-bold text-2xl">
-                            <a href="{{ route('notes.show', $note) }}">{{ $note->title }}</a>
-                        </h2>
-                        <x-user-profile :user='$note->user->name' />
+            <div class="flex flex-wrap w-full gap-3 items-center">
+                @forelse($notes as $note)
+                    <div class="my-3 max-w-xl min-w-sm p-6 bg-white border-b border-gray-200 shadow-sm sm:rounded-lg">
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="font-bold text-2xl text-blue-800">
+                                <a href="{{ route('notes.show', $note) }}">{{ $note->title }}</a>
+                            </h2>
+                            <x-user-profile :user='$note->user->name' />
+                        </div>
+                        <p class="mt-2 text-md">
+                            {{ Str::limit($note->description, 200) }}
+                        </p>
+                        <span class="block mt-4 text-sm opacity-70">{{ $note->updated_at->diffForHumans() }}</span>
                     </div>
-                    <p class="mt-2 text-md">
-                        {{ Str::limit($note->description, 200) }}
+                @empty
+                    <p class="mt-2">
+                        No notes found
                     </p>
-                    <span class="block mt-4 text-sm opacity-70">{{ $note->updated_at->diffForHumans() }}</span>
-                </div>
-            @empty
-                <p class="mt-2">
-                    No notes found
-                </p>
-            @endforelse
+                @endforelse
+            </div>
             {{ $notes->links() }}
         </div>
     </div>

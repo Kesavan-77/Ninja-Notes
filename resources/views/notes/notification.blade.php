@@ -6,11 +6,11 @@
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            @forelse(auth()->user()->notifications as $notification)
+            @forelse($notifications as $notification)
                     <div class="my-6 p-6 bg-white border-b border-gray-200 shadow-sm sm:rounded-lg">
                         <div class="flex items-center justify-between gap-2">
                             <div class="flex items-center gap-2">
-                                <p class="font-bold text-md">
+                                <p class="font-bold text-md text-blue-800">
                                     {{ $notification->data['name'] }}
                                 </p>
                                 <p class="text-md">

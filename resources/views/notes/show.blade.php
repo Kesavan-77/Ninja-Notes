@@ -19,18 +19,18 @@
                 </p>
                 @if ($note->user_id == $auth_id)
                     <a href="{{ route('notes.edit', $note) }}"
-                        class="btn-link btn-lg ml-auto bg-blue-500 hover:bg-blue-700">Edit</a>
+                        class="btn-link btn-lg ml-auto bg-blue-800 hover:bg-blue-900">Edit</a>
                     <form action="{{ route('notes.destroy', $note) }}" method="POST">
                         @method('DELETE')
                         @csrf
-                        <button type="submit" class="btn-link btn-lg ml-4 bg-red-500 hover:bg-red-700"
+                        <button type="submit" class="btn-link btn-lg ml-4 bg-red-600 hover:bg-red-700"
                             onclick="return confirm('Are you sure want to delete this note?')">Delete</button>
                     </form>
                 @endif
             </div>
             <div class="my-6 p-6 bg-white border-b border-gray-200 shadow-sm sm:rounded-lg">
                 <div class="flex items-center justify-between mb-4">
-                    <h2 class="font-bold text-2xl">
+                    <h2 class="font-bold text-2xl text-blue-800">
                         <a href="{{ route('notes.show', $note) }}">{{ $note->title }}</a>
                     </h2>
                     <x-user-profile :user='$note->user->name' />
@@ -51,9 +51,12 @@
                     </span>
                 </div>
             </div>
+
+            <!--------Markdown form-------->
+
             <div class="my-6 p-6 bg-white border-b border-gray-200 shadow-sm sm:rounded-lg hidden"
                 id="markdown-container">
-                <form method="POST" action="{{ route('markdown.store') }}" id="markdown-form">
+                <form method="POST" action="{{route('markdown.store')}}" id="markdown-form">
                     @csrf
                     <div>
                         <x-input-label for="markdown" :value="__('Markdown')" />
@@ -71,14 +74,24 @@
                 </form>
             </div>
 
-            <!-----markdowns------->
+            <!-----markdowns container------->
             <div>
                 <h2 class="font-bold text-lg ml-2">Markdowns:</h2>
                 @forelse($markdown as $mark)
                     <div class="my-6 p-6 bg-white border-b border-gray-200 shadow-sm sm:rounded-lg">
-                        <p class="mt-2 text-sm opacity-50">
-                            @ {{ $mark->user->name }}
-                        </p>
+                        <div class="flex items-center justify-between">
+                            <p class="mt-2 text-sm opacity-50">
+                                @ {{ $mark->user->name }}
+                            </p>
+                            <div class="flex gap-3 items-center">
+                                <a href="{{route('markdown.edit', $mark)}}" class="text-sm opacity-70 cursor-pointer">Edit</a>
+                                <form method="POST" action="{{route('markdown.destroy', $mark)}}">
+                                    @method('DELETE')
+                                    @csrf
+                                    <input type="submit" class="text-sm opacity-70 cursor-pointer" value="Delete">
+                                </form>
+                            </div>
+                        </div>
                         <p class="mt-2 text-md">
                             {{ Str::limit($mark->markdown, 200) }}
                         </p>
