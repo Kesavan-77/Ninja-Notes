@@ -36,7 +36,7 @@ class LikeController extends Controller
             $note = Note::with('user')->find($note_id);
 
             if ($note && $note->user && $note->user->id != Auth::id()) {
-                $userId = $note->user->id;
+                $userId = $note->uuid;
                 $userName = Auth::user()->name;
                 $message = 'has liked your note '.$note->title;
                 $note->user->notify(new UserFollowNotification($userId, $userName, $message));

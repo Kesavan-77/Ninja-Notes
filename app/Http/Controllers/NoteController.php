@@ -20,7 +20,7 @@ class NoteController extends Controller
      */
     public function index()
     {
-        $notes = Note::with('user')->latest('updated_at')->paginate(6);
+        $notes = Note::with('user')->latest('updated_at')->paginate(5);
         return view('notes.index', ['notes' => $notes]);
     }
 

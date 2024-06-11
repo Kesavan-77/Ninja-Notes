@@ -57,13 +57,13 @@ class MarkdownController extends Controller
         $note = Note::with('user')->find($noteId);
 
         if ($note && $note->user && $note->user->id != Auth::id()) {
-            $userId = $note->user->id;
+            $userId = $note->uuid;
             $userName = Auth::user()->name;
             $message = 'has markdowned on your note ' . $note->title;
             $note->user->notify(new UserFollowNotification($userId, $userName, $message));
         }
 
-        $note = Note::where('id',$noteId)->first();
+        $note = Note::where('id', $noteId)->first();
 
         $uuid = $note->uuid;
 
@@ -89,7 +89,7 @@ class MarkdownController extends Controller
      */
     public function edit(Markdown $markdown)
     {
-        return view('notes.markdown-edit')->with('markdown',$markdown);
+        return view('notes.markdown-edit')->with('markdown', $markdown);
     }
 
     /**
@@ -109,7 +109,7 @@ class MarkdownController extends Controller
             'markdown' => $request->markdown,
         ]);
 
-        $note = Note::where('id',$markdown->note_id)->first();
+        $note = Note::where('id', $markdown->note_id)->first();
 
         $uuid = $note->uuid;
 
@@ -126,11 +126,10 @@ class MarkdownController extends Controller
     {
         $markdown->delete();
 
-        $note = Note::where('id',$markdown->note_id)->first();
+        $note = Note::where('id', $markdown->note_id)->first();
 
         $uuid = $note->uuid;
 
         return to_route('notes.show', $uuid)->with('success', "markdown deleted Successfully");
     }
 }
-

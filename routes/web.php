@@ -47,6 +47,6 @@ Route::get('/likes',[LikeController::class,'count'])->name('likes.count');
 
 Route::resource('notes/markdown',MarkdownController::class);
 
-Route::post('/search-note',[SearchController::class,'searchNote']);
+Route::post('/search-note',[SearchController::class,'searchNote'])->name('search-note');
 
 require __DIR__.'/auth.php';

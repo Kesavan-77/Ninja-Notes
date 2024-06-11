@@ -98,8 +98,39 @@
 
         $('#search-note').keyup(function() {
             var search = $('#search-note').val();
-            console.log(search);
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('search-note') }}',
+                data: {
+                    search: search,
+                },
+                success: function(data) {
+                    let res = '';
+                    data.forEach(note => {
+                        res += `
+                    <div class="my-3 min-w-sm p-6 bg-white border-b border-gray-200 shadow-sm sm:rounded-lg">
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="font-bold text-2xl text-blue-800">
+                                <a href="/notes/${note.uuid}">${note.title}</a>
+                            </h2>
+                            <x-user-profile :user="'${note.user.name}'" />
+                        </div>
+                        <p class="mt-2 text-md">
+                            ${note.description.length > 200 ? note.description.substring(0, 200) + '...' : note.description}
+                        </p>
+                        <span class="block mt-4 text-sm opacity-70">${new Date(note.updated_at).toLocaleString()}</span>
+                    </div>`;
+                    });
+                    $('#note-container').html(res);
+                },
+                error: function(xhr) {
+                    console.error('Error during search:', xhr);
+                    alert(
+                        'An error occurred while performing the search. Please try again.');
+                }
+            });
         });
+
     });
 </script>
 

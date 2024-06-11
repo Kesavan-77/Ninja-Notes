@@ -9,8 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
             <!---------- Search bar ----------->
-            <form class="max-w-md mx-auto mb-3">
-                <div class="relative">
+                <div class="mb-5">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                         <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -20,7 +19,6 @@
                     </div>
                     <input type="search" id="search-note" class="block w-full p-4 ps-10 text-sm rounded-lg" placeholder="Search for notes" required />
                 </div>
-            </form>
             <!----------end search bar---------->
 
             <x-alert-success>
@@ -29,9 +27,10 @@
             @if (request()->routeIs('notes.index'))
                 <a href="{{ route('notes.create') }}" class="btn-link btn-lg mb-2 bg-blue-800">+ New Note</a>
             @endif
-            <div class="flex flex-wrap w-full gap-3 items-center">
+            <p id="note-result"></p>
+            <div class="flex flex-wrap w-full gap-3 items-center" id="note-container">
                 @forelse($notes as $note)
-                    <div class="my-3 max-w-xl min-w-sm p-6 bg-white border-b border-gray-200 shadow-sm sm:rounded-lg">
+                    <div class="my-3 min-w-sm p-6 bg-white border-b border-gray-200 shadow-sm sm:rounded-lg" >
                         <div class="flex items-center justify-between mb-4">
                             <h2 class="font-bold text-2xl text-blue-800">
                                 <a href="{{ route('notes.show', $note) }}">{{ $note->title }}</a>
