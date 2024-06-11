@@ -95,6 +95,11 @@
                 }
             });
         });
+
+        $('#search-note').keyup(function() {
+            var search = $('#search-note').val();
+            console.log(search);
+        });
     });
 </script>
 

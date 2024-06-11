@@ -5,6 +5,7 @@ use App\Http\Controllers\MarkdownController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\TrashController;
 use Illuminate\Support\Facades\Route;
 
@@ -45,5 +46,7 @@ Route::post('/likes',[LikeController::class,'manage'])->name('likes.manage');
 Route::get('/likes',[LikeController::class,'count'])->name('likes.count');
 
 Route::resource('notes/markdown',MarkdownController::class);
+
+Route::post('/search-note',[SearchController::class,'searchNote']);
 
 require __DIR__.'/auth.php';

@@ -22,10 +22,10 @@
                 @auth
                     <a href="{{ route('notes.index') }}" class="btn-link btn-lg ml-auto bg-green-500 hover:bg-green-700">Notes</a>
                 @else
-                    <a href="{{ route('login') }}" class="btn-link btn-lg ml-auto bg-blue-500 hover:bg-blue-700">Log in</a>
+                    <a href="{{ route('login') }}" class="btn-link btn-lg ml-auto bg-blue-800 hover:bg-blue-900">Log in</a>
 
                     @if (Route::has('register'))
-                        <a href="{{ route('register') }}" class="btn-link btn-lg ml-auto bg-red-500 hover:bg-red-700">Register</a>
+                        <a href="{{ route('register') }}" class="btn-link btn-lg ml-auto bg-red-700 hover:bg-red-900">Register</a>
                     @endif
                 @endauth
             </div>
