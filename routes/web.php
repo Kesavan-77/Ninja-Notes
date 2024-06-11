@@ -34,6 +34,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/admin/dashboard', function () {
+    return view('admin.adminPages.dashboard');
+})->middleware(['auth:admin', 'verified'])->name('admin.dashboard');
+
 Route::get('/notification',[NotificationController::class,'notify'])->name('notify');
 
 Route::resource('/notes',NoteController::class)->middleware((['auth','verified']));
@@ -50,3 +54,6 @@ Route::resource('notes/markdown',MarkdownController::class);
 Route::post('/search-note',[SearchController::class,'searchNote'])->name('search-note');
 
 require __DIR__.'/auth.php';
+
+
+require __DIR__.'/adminauth.php';

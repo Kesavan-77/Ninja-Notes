@@ -2,10 +2,10 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('login') }}">
+    <form method="POST" action="{{ route('admin.login') }}">
         @csrf
 
-        <p class="block font-medium text-sm text-gray-700 text-center mb-3">USER LOGIN</p>
+        <p class="block font-medium text-sm text-gray-700 text-center mb-3">ADMIN LOGIN</p>
         <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" />
