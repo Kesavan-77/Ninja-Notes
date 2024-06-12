@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Notes;
 
+use App\Http\Controllers\Controller;
 use App\Models\Markdown;
 use App\Models\Note;
 use App\Notifications\UserFollowNotification;
@@ -41,33 +42,22 @@ class MarkdownController extends Controller
     {
         $request->validate([
             'markdown' => 'required',
+            'noteId' => 'required',
         ]);
 
         $markdown = $request->markdown;
         $noteId = $request->noteId;
         $userId = Auth::id();
 
-        Markdown::create([
+        $markdown = Markdown::create([
             'note_id' => $noteId,
             'user_id' => $userId,
             'markdown' => $markdown,
             'uuid' => Str::uuid(),
         ]);
 
-        $note = Note::with('user')->find($noteId);
-
-        if ($note && $note->user && $note->user->id != Auth::id()) {
-            $userId = $note->uuid;
-            $userName = Auth::user()->name;
-            $message = 'has markdowned on your note ' . $note->title;
-            $note->user->notify(new UserFollowNotification($userId, $userName, $message));
-        }
-
-        $note = Note::where('id', $noteId)->first();
-
-        $uuid = $note->uuid;
-
-        return to_route('notes.show', $uuid)->with('success', "markdown created Successfully");
+        $note = $markdown->note;
+        return redirect('notes/'.$note->uuid)->with('success', "Markdown created successfully");
     }
 
     /**

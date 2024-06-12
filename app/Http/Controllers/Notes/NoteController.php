@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Notes;
 
+use App\Http\Controllers\Controller;
 use App\Models\Markdown;
 use App\Models\Note;
 use App\Models\User;
