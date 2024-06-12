@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminAuth\Dashboard;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,7 @@ Route::middleware('auth')->group(function () {
 });
 
 
+Route::get('admin/dashboard', [Dashboard::class, 'index'])->name('admin.index');
 
 //User login routes
 require __DIR__.'/path/user-route.php';

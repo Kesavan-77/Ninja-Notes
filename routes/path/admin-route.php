@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminAuth\AuthenticatedSessionController;
 use App\Http\Controllers\AdminAuth\ConfirmablePasswordController;
+use App\Http\Controllers\AdminAuth\Dashboard;
 use App\Http\Controllers\AdminAuth\EmailVerificationNotificationController;
 use App\Http\Controllers\AdminAuth\EmailVerificationPromptController;
 use App\Http\Controllers\AdminAuth\NewPasswordController;
@@ -31,6 +32,7 @@ Route::middleware('guest:admin')->group(function () {
 });
 
 Route::middleware('auth:admin')->group(function () {
+
     Route::get('admin/verify-email', EmailVerificationPromptController::class)
                 ->name('admin.verification.notice');
 
