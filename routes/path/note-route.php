@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminAuth\DashboardController;
 use App\Http\Controllers\Notes\LikeController;
 use App\Http\Controllers\Notes\MarkdownController;
 use App\Http\Controllers\Notes\NoteController;
@@ -28,9 +29,4 @@ Route::prefix('trash')->group(function () {
 // Markdown
 Route::resource('notes/markdown', MarkdownController::class);
 
-// Admin Routes
-Route::middleware(['auth:admin', 'verified'])->group(function () {
-    Route::get('/admin/dashboard', function () {
-        return view('admin.adminPages.dashboard');
-    })->name('admin.dashboard');
-});
+

@@ -126,9 +126,9 @@
                                     <td class="px-6 py-4">
                                         $2999
                                     </td>
-                                    {{-- <td class="px-6 py-4 text-right">
-                                        <a href="{{ route('admin.index') }}" class="font-medium text-blue-600 hover:underline">Go to Dashboard</a>
-                                    </td> --}}
+                                    <td class="px-6 py-4 text-right">
+                                        <a href="{{ route('admin.dashboard') }}" class="font-medium text-blue-600 hover:underline">Go to Dashboard</a>   
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

@@ -29,7 +29,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return to_route('admin.index');
+        return redirect()->intended(RouteServiceProvider::ADMIN_DASHBOARD);
     }
 
     /**
