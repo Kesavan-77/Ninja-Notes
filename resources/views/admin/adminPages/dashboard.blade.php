@@ -17,6 +17,26 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
+<style>
+    .hover-row {
+        transition: background-color 0.3s, transform 0.3s;
+    }
+    .hover-row:hover {
+        background-color: #f3f4f6;
+    }
+    .delete-btn {
+        transition: color 0.3s, transform 0.3s;
+    }
+    .delete-btn:hover {
+        color: #ff4d4d;
+        transform: scale(1.1);
+    }
+    .icon {
+        width: 1rem;
+        height: 1rem;
+        margin-right: 0.25rem;
+    }
+</style>
 
 <body class="font-sans antialiased">
     <div class="min-h-screen bg-gray-100">
@@ -88,54 +108,58 @@
                 </div>
             </nav>
         </header>
-        <main>
-            <div class="py-12">
-                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                        <table class="w-full text-sm text-left text-gray-700">
-                            <thead class="text-xs uppercase bg-gray-200 text-gray-600">
-                                <tr>
-                                    <th scope="col" class="px-6 py-3">
-                                        User name
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Total Notes
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Total Likes
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Total markdowns
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        <span class="sr-only">Edit</span>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="bg-white border-b hover:bg-gray-100">
+        <main class="bg-gray-50 min-h-screen py-12">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="relative overflow-x-auto shadow-lg rounded-xl">
+                    <table class="w-full text-sm text-left text-gray-800 bg-white rounded-xl overflow-hidden">
+                        <thead class="text-xs uppercase bg-gradient-to-r from-blue-800 to-indigo-800 text-white">
+                            <tr>
+                                <th scope="col" class="px-6 py-4">User name</th>
+                                <th scope="col" class="px-6 py-4">Total Notes</th>
+                                <th scope="col" class="px-6 py-4">Total Likes</th>
+                                <th scope="col" class="px-6 py-4">Total markdowns</th>
+                                <th scope="col" class="px-6 py-4">
+                                    <span class="sr-only">Edit</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for ($i = 0; $i < count($users); $i++)
+                                <tr class="bg-white border-b hover-row h-20">
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900">
-                                        Apple MacBook Pro 17"
-                                    </th>
+                                        {{ $users[$i]->name }}</th>
                                     <td class="px-6 py-4">
-                                        Silver
+                                        <span
+                                            class="bg-green-100 text-green-700 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">{{ count($notes[$i]->notes) }}</span>
                                     </td>
                                     <td class="px-6 py-4">
-                                        Laptop
+                                        <span
+                                            class="bg-yellow-100 text-yellow-700 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">{{ count($likes[$i]->likes) }}</span>
                                     </td>
                                     <td class="px-6 py-4">
-                                        $2999
+                                        <span
+                                            class="bg-red-100 text-red-700 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">{{ count($markdowns[$i]->markdowns) }}</span>
                                     </td>
                                     <td class="px-6 py-4 text-right">
-                                        <a href="{{ route('admin.dashboard') }}" class="font-medium text-blue-600 hover:underline">Go to Dashboard</a>   
+                                        <a href="{{ route('admin.dashboard') }}"
+                                            class="delete-btn flex items-center justify-center font-medium text-red-600">
+                                            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M6 18L18 6M6 6l12 12"></path>
+                                            </svg>
+                                            Delete User
+                                        </a>
                                     </td>
                                 </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                            @endfor
+                        </tbody>
+                    </table>
                 </div>
             </div>
+
         </main>
+
     </div>
 </body>
 

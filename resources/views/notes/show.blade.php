@@ -56,7 +56,7 @@
 
             <div class="my-6 p-6 bg-white border-b border-gray-200 shadow-sm sm:rounded-lg hidden"
                 id="markdown-container">
-                <form method="POST" action="{{route('markdown.store')}}" id="markdown-form">
+                <form method="POST" action="{{ route('markdown.store') }}" id="markdown-form">
                     @csrf
                     <div>
                         <x-input-label for="markdown" :value="__('Markdown')" />
@@ -83,14 +83,17 @@
                             <p class="mt-2 text-sm opacity-50">
                                 @ {{ $mark->user->name }}
                             </p>
-                            <div class="flex gap-3 items-center">
-                                <a href="{{route('markdown.edit', $mark)}}" class="text-sm opacity-70 cursor-pointer">Edit</a>
-                                <form method="POST" action="{{route('markdown.destroy', $mark)}}">
-                                    @method('DELETE')
-                                    @csrf
-                                    <input type="submit" class="text-sm opacity-70 cursor-pointer" value="Delete">
-                                </form>
-                            </div>
+                            @if ($mark->user->id == Auth::id())
+                                <div class="flex gap-3 items-center">
+                                    <a href="{{ route('markdown.edit', $mark) }}"
+                                        class="text-sm opacity-70 cursor-pointer">Edit</a>
+                                    <form method="POST" action="{{ route('markdown.destroy', $mark) }}">
+                                        @method('DELETE')
+                                        @csrf
+                                        <input type="submit" class="text-sm opacity-70 cursor-pointer" value="Delete">
+                                    </form>
+                                </div>
+                            @endif
                         </div>
                         <p class="mt-2 text-md">
                             {{ Str::limit($mark->markdown, 200) }}

@@ -47,8 +47,8 @@ class User extends Authenticatable
         return $this->hasMany(Note::class);
     }
 
-    public function like(){
-        return $this->hasOne(Like::class);
+    public function likes(){
+        return $this->hasMany(Like::class);
     }
 
     public function markdowns(){
