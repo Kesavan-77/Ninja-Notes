@@ -13,7 +13,7 @@
                 <div class="my-6 p-6 bg-white border-b border-gray-200 shadow-sm sm:rounded-lg">
                     <div class="flex items-center justify-between mb-4">
                         <h2 class="font-bold text-3xl">
-                            <a href="{{ route('notes.show', $trash) }}">{{ $trash->title }}</a>
+                            {{ $trash->title }}
                         </h2>
                         <x-user-profile :user='$trash->user->name'/>
                     </div>
