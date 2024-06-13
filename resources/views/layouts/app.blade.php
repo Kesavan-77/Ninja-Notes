@@ -113,18 +113,20 @@
                     var res = '';
                     data.forEach(note => {
                         res += `
-            <div class="my-3 min-w-sm p-6 bg-white border-b border-gray-200 shadow-sm sm:rounded-lg">
-                <div class="flex items-center justify-between mb-4">
-                    <h2 class="font-bold text-2xl text-blue-800">
-                        <a href="/notes/${note.uuid}">${note.title}</a>
-                    </h2>
-                    <x-user-profile :user="'${note.user.name}'" />
-                </div>
-                <p class="mt-2 text-md">
-                    ${note.description.length > 200 ? note.description.substring(0, 200) + '...' : note.description}
-                </p>
-                <span class="block mt-4 text-sm opacity-70">${new Date(note.updated_at).toLocaleString()}</span>
-            </div>`;
+                        <div class="flex flex-col bg-white border border-gray-200 rounded-lg shadow-sm">
+                        <div class="px-6 py-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h2 class="text-lg font-semibold text-blue-800">
+                                    <a href="/notes/${note.uuid}">${note.title}</a>
+                                </h2>
+                                <x-user-profile :user="'${note.user.name}'" />
+                            </div>
+                            <p class="text-gray-700"> ${note.description.length > 200 ? note.description.substring(0, 200) + '...' : note.description}</p>
+                        </div>
+                        <div class="px-6 py-2 mt-auto">
+                            <p class="text-xs text-gray-500">${new Date(note.updated_at).toLocaleString()}</p>
+                        </div>
+                    </div>`;
                     });
                     $noteContainer.html(res);
                 },
