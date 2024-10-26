@@ -57,10 +57,6 @@ To get started with NinjaNotes, follow these steps:
     npm run dev
     ```
 
-## Contributing
-
-Thank you for considering contributing to NinjaNotes! Please read our [contribution guidelines](CONTRIBUTING.md) before submitting a pull request.
-
 ## License
 
 NinjaNotes is open-sourced software licensed under the [MIT license](LICENSE).
